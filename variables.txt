@@ -1,0 +1,60 @@
+$idusuario
+$nombre
+$apellido
+$dni
+$inmueble
+$subdireccion
+$direccion
+$tipo
+$telefono
+$estatus
+$edificio
+$piso
+$correo
+
+idusuario
+nombre
+apellido
+dni
+inmueble
+subdireccion
+direccion
+tipo
+telefono
+estatus
+edificio
+piso
+correo
+
+$idusuario, $nombre, $apellido, $dni, $inmueble, $subdireccion, $direccion, $tipo, $telefono, $estatus, $edificio, $piso, $correo
+
+idusuario, nombre, apellido, dni, inmueble, subdireccion, direccion, tipo, telefono, estatus, edificio, piso, correo
+
+$idusuario = idusuario
+$nombre = nombre
+$apellido = apellido
+$dni = dni
+$inmueble = inmueble
+$subdireccion = subdireccion
+$direccion = direccion
+$tipo = tipo
+$telefono = telefono
+$estatus = estatus
+$edificio = edificio
+$piso = piso
+$correo = correo
+
+idusuario = $idusuario
+nombre = $nombre
+apellido = $apellido
+dni = $dni
+inmueble = $inmueble
+subdireccion = $subdireccion
+direccion = $direccion
+tipo = $tipo
+telefono = $telefono
+estatus = $estatus
+edificio = $edificio
+piso = $piso
+correo = $correo
+
