@@ -22,25 +22,57 @@
 				<h1 class="text-center">Registro para el directorio telefónico del SOBSE</h1>
 			</div>
 		</div>
-		<div id="Campos" class="campos">
-			<table>
-			  <tr>
-				<td> <p class="Enc"> Nombre: <input type="text" name="nombre" value="" required></p></td>              
-				<td> <p class="Enc">Área: <input type="text" name="nombre" value="" required></p></td>
-				<td> <p class="Enc">Extensión: <input type="text"name="nombre" value="" required></p></td>
-			  </tr>
-			  <tr></tr>
-			  <tr>
-				<td> <p class="Enc">Inmueble: <input type="text" id=tramo1 onblur= "mayus()" required value="" ></p></td>
-				<td> <p class="Enc">Dirección general: <input type="text" id=tramo2 onblur= "mayus()" required value="" ></p></td>
-				<td> <p class="Enc">Puesto: <input type="text" id=tramo2 onblur= "mayus()" required value="" ></p></td>			
-			  </tr>
-			  <tr>
-				<td> <p class="Enc">Correo institucional: <input type="text" id=tramo1 onblur= "mayus()" required value="" ></p></td>
-				<td><button onclick="CREATE()">Agregar Registro</button></td>
-				<td><button onclick="linkdirectorio()">Directorio</button></td>
-			  </tr>
-			</table> 
+		<div class="container">
+			<div id="cuadro2">
+				<form class="form-horizontal" action="" method="POST">
+					<div class="form-group">
+						<h3 class="col-sm-offset-3 col-sm-8 text-center"></h3>
+					</div>
+					<input type="hidden" id="idusuario" name="idusuario" value="0">
+					<input type="hidden" id="opcion" name="opcion" value="registrar">
+					<div class="form-group">
+						<label for="nombre" class="col-sm-2 control-label">Nombre</label>
+						<div class="col-sm-5"><input id="nombre" name="nombre" type="text" class="form-control"  autofocus></div>				
+					</div>
+					<div class="form-group">
+						<label for="apellido" class="col-sm-2 control-label">Área</label>
+						<div class="col-sm-5"><input id="apellido" name="apellido" type="text" class="form-control" ></div>
+					</div>
+					<div class="form-group">
+						<label for="extension" class="col-sm-2 control-label">Extensión</label>
+						<div class="col-sm-5"><input id="extension" name="extension" type="number" class="form-control" maxlength="5" ></div>
+					</div>
+					<div class="form-group">
+						<label for="inmueble" class="col-sm-2 control-label">Inmueble</label>
+						<div class="col-sm-5"><input id="inmueble" name="inmueble" type="text" class="form-control"  ></div>
+					</div>
+					<div class="form-group">
+						<label for="jerarquia" class="col-sm-2 control-label">Jerarquia</label>
+						<div class="col-sm-5"><input id="jerarquia" name="jerarquia" type="text" class="form-control"  ></div>
+					</div>
+					<div class="form-group">
+						<label for="puesto" class="col-sm-2 control-label">Puesto</label>
+						<div class="col-sm-5"><input id="puesto" name="puesto" type="text" class="form-control"  ></div>
+					</div>
+					<div class="form-group">
+						<label for="correo" class="col-sm-2 control-label">Correo Institucional</label>
+						<div class="col-sm-5"><input id="correo" name="correo" type="text" class="form-control" maxlength="35" ></div>
+					</div>
+					<div class="form-group">
+						<label for="d3" class="col-sm-2 control-label">Dígito 3</label>
+						<div class="col-sm-5"><input id="d3" name="d3" type="text" class="form-control" maxlength="1" ></div>
+					</div>					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-5">
+							<input id="" type="submit" class="botones" value="Agregar registro">
+							<input id="btn_listar" type="submit" class="botones" onclick="linkdirectorio()" value="Directorio">
+						</div>
+					</div>
+				</form>
+				<div class="col-sm-offset-2 col-sm-8">
+					<p class="mensaje"></p>
+				</div>
+			</div>
 		</div>
 		<script src="js/jquery-1.12.3.js"></script>
 		<script src="js/bootstrap.min.js"></script>

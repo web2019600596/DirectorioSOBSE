@@ -11,3 +11,7 @@ function login(){
 function linkdirectorio(){
   location.assign("./index.html")
 }
+
+function linkregistro(){
+  location.assign("./registro.html")
+}

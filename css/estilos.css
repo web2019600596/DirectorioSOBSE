@@ -42,7 +42,7 @@
   }
   .imgenc {
 	display: flex;
-	justify-content: space-around;
+	justify-content:center;
   }
   
   .titleSesion {
@@ -119,3 +119,50 @@
   .Enc{
 	font-family: 'Inter', sans-serif;
   }
+
+  .botones {
+	background-color:#500303;
+	border-radius:10px;
+	border:1px solid #1f0000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:8px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.botones:hover {
+	background-color:#135702;
+}
+.botones:active {
+	position:relative;
+	top:1px;
+} /*Estilos index.html*/
+.divbotones{
+	text-align: right;
+	margin-right: 1rem;
+}
+.btncerrarses {
+	font-family: Arial;
+	color: #c70000;
+	font-size: 12px;
+	border-radius: 16px;
+	border: 1px #c70000 solid;
+	padding: 11px 13px;
+	background-color: #ffffff;
+	cursor: pointer;
+	display: inline-flex;
+  text-align: right;
+}
+.btncerrarses:hover {
+	background-color: #581B1B;
+  color: white;
+}
+.container{
+	display: flex;
+	justify-content: center;
+	margin-left: 10%;
+	margin-right: 10%;
+}
