@@ -1,0 +1,101 @@
+.fondo{
+	background: rgb(27, 182, 0);
+	color: #ffffff;
+}
+
+.linea-izquierda{
+	border-left: solid 3px #1bb600;	
+}
+
+.ocultar{
+
+	display: none;
+}
+
+/*ESTILOS DE LA INTERFAZ LOGIN*/
+.containerLogin {
+	width: 100%;
+	height: 45rem;
+  }
+  
+  .containerCardLogin {
+	display: flex;
+	width: 60%;
+	height: 25rem;
+	border-radius: 5px 5px 5px 5px;
+	margin: 2rem auto;
+	box-shadow: 2px 1px 18px 0px;
+  }
+  
+  .halfJPG {
+	width: 50%;
+  }
+  
+  .halfWhite {
+	width: 50%;
+  }
+  
+  .img {
+	width: 100%;
+	min-height: 399.5px;
+	border-radius: 5px 0px 0px 5px;
+  }
+  .imgenc {
+	display: flex;
+	justify-content: space-around;
+  }
+  
+  .titleSesion {
+	text-align: center;
+	color:  #75293D;
+	margin-top: 3rem;
+  }
+  
+  .divInputs {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 8%;
+	margin-bottom: 8%;
+  }
+  .btningresar {
+	  box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	  background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	  background-color:#3d94f6;
+	  border-radius:6px;
+	  border:1px solid #337fed;
+	  display:inline-block;
+	  cursor:pointer;
+	  color:#ffffff;
+	  font-family:Arial;
+	  font-size:15px;
+	  font-weight:bold;
+	  text-decoration:none;
+	  text-shadow:0px 1px 0px #1570cd;
+	width: 30%;
+	height: 3rem;
+  }
+  .btningresar:hover {
+	  background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	  background-color:#1e62d0;
+  }
+  .btningresar:active {
+	  position:relative;
+	  top:1px;
+  }
+  
+  .log-input {
+	padding: 5px;
+	font-size: 16px;
+	border-width: 1px;
+	border-color: #CCCCCC;
+	background-color: #FFFFFF;
+	color: #000000;
+	border-style: solid;
+	border-radius: 10px;
+	width: 65%;
+	height: 2rem;
+  }
+  .log-input:focus {
+	outline:none;
+  }
+  
