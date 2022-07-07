@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Registro SOBSE 2022</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+		<link rel="stylesheet" href="css/estilos.css">
+		<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/af-2.4.0/b-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.css"/>
+ 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/af-2.4.0/b-2.2.3/cr-1.5.6/r-2.3.0/datatables.min.js"></script> -->
+		<!-- Buttons DataTables -->
+		<link rel="stylesheet" href="css/buttons.bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	</head>
+	<body>
+		<div class="row fondo">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<h1 class="text-center">Registro para el directorio telefónico del SOBSE</h1>
+			</div>
+		</div>
+		<div id="Campos" class="campos">
+			<table>
+			  <tr>
+				<td> <p class="Enc"> Nombre: <input type="text" name="nombre" value="" required></p></td>              
+				<td> <p class="Enc">Área: <input type="text" name="nombre" value="" required></p></td>
+				<td> <p class="Enc">Extensión: <input type="text"name="nombre" value="" required></p></td>
+			  </tr>
+			  <tr>
+				<td> <p class="Enc">Inmueble: <input type="text" id=tramo1 onblur= "mayus()" required value="" ></p></td>
+				<td> <p class="Enc">Dirección general: <input type="text" id=tramo2 onblur= "mayus()" required value="" ></p></td>
+				<td> <p class="Enc">Puesto: <input type="text" id=tramo2 onblur= "mayus()" required value="" ></p></td>			
+			  </tr>
+			  <tr>
+				<td> <p class="Enc">Correo institucional: <input type="text" id=tramo1 onblur= "mayus()" required value="" ></p></td>
+				<td><button onclick="CREATE()">Agregar Registro</button></td>
+				<td><button onclick="linkdirectorio()">Directorio</button></td>
+			  </tr>
+			</table> 
+		</div>
+		<script src="js/jquery-1.12.3.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.dataTables.min.js"></script>
+		<script src="js/dataTables.bootstrap.js"></script>
+		<script src="js/login.js"></script>
+		<!--botones DataTables-->	
+		<script src="js/dataTables.buttons.min.js"></script>
+		<script src="js/buttons.bootstrap.min.js"></script>
+		<!--Libreria para exportar Excel-->
+		<script src="js/jszip.min.js"></script>
+		<!--Librerias para exportar PDF-->
+		<script src="js/pdfmake.min.js"></script>
+		<script src="js/vfs_fonts.js"></script>
+		<!--Librerias para botones de exportación-->
+		<script src="js/buttons.html5.min.js"></script>
+
+		<script>		
+			$(document).on("ready", function(){
+				listar();
+				guardar();
+			});
+
+			$("#btn_listar").on("click", function(){
+				listar();
+			})
+
+			var guardar = function(){
+				$("form").on("submit", function(e){
+					e.preventDefault();
+					var frm = $(this).serialize();
+					// console.log( frm );
+					$.ajax({
+						method: "POST",
+						url: "guardar.php",
+						data: frm
+					}).done( function( info ){
+						// console.log( info );
+						var json_info = JSON.parse( info );
+						// console.log( json_info );
+						mostrar_mensaje( json_info );
+						limpiar_datos();
+						listar();
+					});
+				});
+			}
+
+			var mostrar_mensaje = function( informacion ){
+				var texto = "", color = "";
+				if( informacion.respuesta == "BIEN" ){
+					texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+					color = "#379911";
+				}else if( informacion.respuesta == "ERROR"){
+					texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+					color = "#C9302C";
+				}else if( informacion.respuesta == "EXISTE" ){
+					texto = "<strong>Información!</strong> el usuario ya existe.";
+					color = "#5b94c5";
+				}else if( informacion.respuesta == "VACIO" ){
+					texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
+					color = "#ddb11d";
+				}
+
+				$(".mensaje").html( texto ).css({"color": color });
+				$(".mensaje").fadeOut(5000, function(){
+					$(this).html("");
+					$(this).fadeIn(3000);
+				}); 
+			}
+
+			var limpiar_datos = function(){
+				$("#opcion").val("registrar");
+				$("#idusuario").val("");
+				$("#nombre").val("").focus();
+				$("#area").val("");
+				$("#extension").val("");
+				$("#inmueble").val("");
+				$("#jerarquia").val("");
+				$("#puesto").val("");
+				$("#correo").val("");
+				$("#d3").val("");
+			}
+
+			var listar = function(){
+				var table = $("#dt_cliente").DataTable({
+					"destroy": true,
+					"ajax":{
+						"method": "POST",
+						"url": "listar.php"
+					},
+					"columns":[
+						// {"data": "idusuario"},
+						{"data": "nombre"},
+						{"data": "area"},
+						{"data": "extension"},
+						{"data": "inmueble"},
+						{"data": "jerarquia"},
+						{"data": "puesto"},
+						{"data": "correo"},
+						// {"data": "d3"}, // ,
+						// {"defaultContent": "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}
+					],
+					"language": idioma_espanol
+				});
+
+				obtener_data_editar("#dt_cliente tbody", table);
+				obtener_id_eliminar("#dt_cliente tbody", table);
+			}
+
+			var obtener_data_editar = function(tbody, table){
+				$(tbody).on("click", "button.editar", function(){
+					var data = table.row( $(this).parents("tr") ).data();
+					console.log( data);
+					var idusuario = $("#idusuario").val( data.idusuario ),
+							nombre = $("#nombre").val( data.nombre ),
+							apellido = $("#area").val( data.apellido ),
+							extension = $("#extension").val( data.extension ),
+							inmueble = $("#inmueble").val( data.inmueble ),
+							jerarquia = $("#jerarquia").val( data.jerarquia ),
+							puesto = $("#puesto").val( data.puesto ),
+							email = $("#correo").val( data.email ),
+							d3 = $("#d3").val( data.d3 );
+				});
+			}
+
+			var obtener_id_eliminar = function(tbody, table){
+				$(tbody).on("click", "button.eliminar", function(){
+					var data = table.row( $(this).parents("tr") ).data();
+					var idusuario = $("#frmEliminaUsuario #idusuario").val( data.idusuario );
+				});
+			}
+
+			var idioma_espanol = {
+			    "sProcessing":     "Procesando...",
+			    "sLengthMenu":     "Mostrar _MENU_ registros",
+			    "sZeroRecords":    "No se encontraron resultados",
+			    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+			    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+			    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			    "sInfoPostFix":    "",
+			    "sSearch":         "Buscar:",
+			    "sUrl":            "",
+			    "sInfoThousands":  ",",
+			    "sLoadingRecords": "Cargando...",
+			    "oPaginate": {
+			        "sFirst":    "Primero",
+			        "sLast":     "Último",
+			        "sNext":     "Siguiente",
+			        "sPrevious": "Anterior",
+			    },
+			    "oAria": {
+			        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+			        "sSortDescending": ": Activar para ordenar la columna de manera descendente",
+			    },
+			    "buttons": {
+			        "copy": "Copiar",
+			        "colvis": "Visibilidad"
+			    }
+			}
+		</script>
+
+	</body>
+</html>
